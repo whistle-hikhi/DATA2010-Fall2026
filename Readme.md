@@ -26,5 +26,5 @@ Canvas Links: [Canvas](https://vinuni.instructure.com/courses/3364)
 
 | Week | Problems |
 | --- | --- |
-| 01 | Introduction to Data Science Programming |[Week 1](Week_01/Week_01.md) |
+| 01 | [Introduction to Data Science Programming](Week_01/Week_01.md) |
 | 02 | |
