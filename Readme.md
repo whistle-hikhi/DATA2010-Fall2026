@@ -1,4 +1,4 @@
-# DATA2010 - Data Science Programming - Autumn 2025
+# DATA2010 - Data Science Programming - Autumn 2026
 
 ## Course Objections
 This course covers the major programming tools used in Data Science. This includes libraries within Python and the R programming language. Python libraries include those used in data preprocessing, managing data tables and data pipelines, dataflow programming on GPUs, visualisation and scientific computing. Some R counterparts to these are covered. Major components of the R development environment are also taught including documentation and external integration.
@@ -27,4 +27,5 @@ Canvas Links: [Canvas](https://vinuni.instructure.com/courses/3364)
 | Week | Problems |
 | --- | --- |
 | 01 | [Introduction to Data Science Programming](Week_01/Week_01.md) |
-| 02 | |
+| 02 | [The Data Science Lifecycle & Processing Pipelines](Week_02/Week_02.md) |
+| 03 | [Reproducible Data Science](Week_03/Week_03.md) |
