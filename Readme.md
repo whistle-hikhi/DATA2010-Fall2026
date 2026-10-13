@@ -29,3 +29,4 @@ Canvas Links: [Canvas](https://vinuni.instructure.com/courses/3364)
 | 01 | [Introduction to Data Science Programming](Week_01/Week_01.md) |
 | 02 | [The Data Science Lifecycle & Processing Pipelines](Week_02/Week_02.md) |
 | 03 | [Reproducible Data Science](Week_03/Week_03.md) |
+| 04 | [Data Visualization](Week_04/Week_04.md) |
