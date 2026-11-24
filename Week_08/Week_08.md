@@ -26,11 +26,15 @@ By the end of this lab you should be able to:
 6. Explore lexical ambiguity with WordNet and try a simple Word Sense Disambiguation (WSD) algorithm.
 7. Run Named Entity Recognition (NER) and read BIO tags.
 
+
+
 ### Deliverable
 
-Submit your notebook with all code cells run, plus short written answers (2–4 sentences) to every question marked **✍️**. Bring your answers to the lecture.
+Submit your notebook with all code cells run, plus short written answers (2–4 sentences) to every question marked **✍️**.
 
 ---
+
+
 
 ## Task 0 – Setup (10 min)
 
@@ -65,6 +69,8 @@ from nltk.wsd import lesk
 
 ---
 
+
+
 ## Part 1 – Corpus Data (20 min)
 
 A **corpus** is a structured collection of texts used for linguistic or computational analysis. NLTK includes a small sample from **Project Gutenberg**, which is an example of a *data dump* source.
@@ -80,8 +86,11 @@ print(raw[:500])
 ```
 
 **TODO:**
+
 1. Print the number of **characters**, **words** (`gutenberg.words(...)`) and **sentences** (`gutenberg.sents(...)`) for *every* file in the corpus. Show the results as a table (a `pandas.DataFrame` is fine).
 2. Which text is the longest? Which has the longest average sentence length?
+
+
 
 ### Task 1.2 – Thinking about sources ✍️
 
@@ -97,7 +106,11 @@ Data can come from four main sources: **pre-prepared datasets, APIs, data dumps,
 
 ---
 
+
+
 ## Part 2 – Cleaning and Character Encoding (20 min)
+
+
 
 ### Task 2.1 – Unicode code points
 
@@ -110,8 +123,11 @@ for ch in s:
 ```
 
 **TODO:**
+
 1. Compare `len("chào")` with `len("chào".encode("utf-8"))`. Why are they different?
 2. Print the code points and UTF-8 bytes for `"Việt Nam"` and for an emoji of your choice, e.g. `"😀"`. How many bytes does the emoji need?
+
+
 
 ### Task 2.2 – Mojibake and how to fix it
 
@@ -125,8 +141,11 @@ print(ftfy.fix_text(broken))
 ```
 
 **TODO:**
+
 1. Run `ftfy.fix_text("cáº£m Æ¡n")`. What do you get?
 2. Create your own mojibake from a Vietnamese sentence of your choice, then fix it with `ftfy`.
+
+
 
 ### Task 2.3 – Same text, different code points
 
@@ -149,23 +168,28 @@ post = ("OMG @linh_99 the new café menu is soooo good :-) thnx 4 the tip!! "
 
 **TODO:** Write a regular expression for each item below and use `re.findall` to extract it from `post`:
 
-| Item       | Expected result                  |
-|------------|----------------------------------|
-| Mentions   | `['@linh_99']`                   |
-| Hashtags   | `['#foodie', '#Hanoi']`          |
-| URLs       | `['http://bit.ly/abc123']`       |
-| Emails     | `['linh@vinuni.edu.vn']`         |
-| Emoticons  | `[':-)']`                        |
+
+| Item      | Expected result            |
+| --------- | -------------------------- |
+| Mentions  | `['@linh_99']`             |
+| Hashtags  | `['#foodie', '#Hanoi']`    |
+| URLs      | `['http://bit.ly/abc123']` |
+| Emails    | `['linh@vinuni.edu.vn']`   |
+| Emoticons | `[':-)']`                  |
+
 
 > ⚠️ **Check carefully:** does your mention pattern also match part of the email address? If so, fix it.
 
 **TODO (continued):**
+
 1. Write a function `reduce_elongation(text)` that shortens any character repeated 3+ times to 2 (`"soooo"` → `"soo"`). *Hint:* `re.sub(r"(\w)\1{2,}", r"\1\1", text)`.
 2. Build a small dictionary to normalise abbreviations (`"thnx" → "thanks"`, `"4" → "for"`, `"omg" → "oh my god"`) and apply it.
 
 **✍️ Q6.** Is it always a good idea to "clean" text like this? Give an example of a research question where removing emoticons, elongations, or spelling variation would **destroy** useful information.
 
 ---
+
+
 
 ## Part 3 – Tokenisation (20 min)
 
@@ -175,6 +199,8 @@ post = ("OMG @linh_99 the new café menu is soooo good :-) thnx 4 the tip!! "
 text = ("Usually lemon and sugar or icecream and chocolate sauce or rolled "
         "with jam/maple syrup.Mmmm.. can't wait!!")
 ```
+
+
 
 ### Task 3.1 – Predict first!
 
@@ -192,9 +218,12 @@ methods = {
 ```
 
 **TODO:**
+
 1. Print the number of tokens and the full token list for each method.
 2. Make a table showing how each method handles `jam/maple`, `syrup.Mmmm..`, `can't`, and `wait!!`.
 3. Which method do you think is "best" for this sentence? Justify your answer.
+
+
 
 ### Task 3.3 – Harder cases
 
@@ -211,6 +240,8 @@ examples = [
 **✍️ Q8.** In Vietnamese, *Hà Nội*, *thủ đô* and *Việt Nam* are each a single word made of two syllables. What did the tokeniser do? Why is tokenisation harder for Vietnamese than for English, even though both use spaces?
 
 ---
+
+
 
 ## Part 4 – Multiword Expressions and Collocations (15 min)
 
@@ -244,7 +275,11 @@ print(finder.nbest(measures.pmi, 15))
 
 ---
 
+
+
 ## Part 5 – Corpus Linguistics Basics (10 min)
+
+
 
 ### Task 5.1 – Frequency list
 
@@ -263,7 +298,11 @@ emma.concordance("spring", lines=14)
 
 ---
 
+
+
 ## Part 6 – Lexical Ambiguity and Word Sense Disambiguation (15 min)
+
+
 
 ### Task 6.1 – How many senses?
 
@@ -294,6 +333,7 @@ for sent in sentences:
 ```
 
 **TODO:**
+
 1. Check each answer. Is it correct?
 2. For any wrong answer, try passing `pos="n"` to `lesk(...)`. Does that help?
 3. Write two sentences of your own for other senses of *spring* (e.g. *spring to mind*, *spring onion*) and test them.
@@ -301,6 +341,8 @@ for sent in sentences:
 **✍️ Q12.** Why might a simple overlap method like Lesk fail? The lecture mentions that "most frequent sense" is a very strong baseline. What does this mean?
 
 ---
+
+
 
 ## Part 7 – Named Entity Recognition (15 min)
 
@@ -316,6 +358,8 @@ for ent in doc.ents:
     print(ent.text, ent.label_, spacy.explain(ent.label_))
 ```
 
+
+
 ### Task 7.2 – BIO tags (NER as sequence labelling)
 
 NER is often treated as labelling **each token** with B- (begin), I- (inside), or O (outside):
@@ -330,6 +374,8 @@ for tok in doc:
 
 > *"Dr Nguyen Van An joined VinUniversity in Hanoi on 1 September 2025."*
 
+
+
 ### Task 7.3 – Breaking NER
 
 **TODO:** Run NER on each of the following and record what changes:
@@ -343,6 +389,8 @@ for tok in doc:
 **✍️ Q14.** Name one domain (e.g. medicine, law, finance) where the standard labels PERSON/ORG/GPE/DATE would **not** be enough. What entity types would you add?
 
 ---
+
+
 
 ## Challenge Task (optional) ⭐
 
@@ -365,18 +413,23 @@ Test it on at least three messy texts (with mojibake, hashtags, emoticons, and n
 
 ---
 
+
+
 ## Before the lecture: checklist
 
 - [ ] All code cells run without errors
 - [ ] Written answers to Q1–Q14
 - [ ] Your token-count prediction from Q7 (we will compare it in class!)
 - [ ] Your list of *spring* senses from Q11
-- [ ] *(Recommended reading)* Eysenbach & Till (2001), *Ethical issues in qualitative research on internet communities*, BMJ: <https://doi.org/10.1136/bmj.323.7321.1103>
+- [ ] *(Recommended reading)* Eysenbach & Till (2001), *Ethical issues in qualitative research on internet communities*, BMJ: [https://doi.org/10.1136/bmj.323.7321.1103](https://doi.org/10.1136/bmj.323.7321.1103)
+
+
 
 ## Further resources
 
-- NLTK Book, Chapters 1–2: <https://www.nltk.org/book/>
-- Jurafsky & Martin, *Speech and Language Processing* (3rd ed. draft), Chapter 2: <https://web.stanford.edu/~jurafsky/slp3/>
-- Python Unicode HOWTO: <https://docs.python.org/3/howto/unicode.html>
-- ftfy documentation: <https://ftfy.readthedocs.io/>
-- spaCy NER guide: <https://spacy.io/usage/linguistic-features#named-entities>
+- NLTK Book, Chapters 1–2: [https://www.nltk.org/book/](https://www.nltk.org/book/)
+- Jurafsky & Martin, *Speech and Language Processing* (3rd ed. draft), Chapter 2: [https://web.stanford.edu/~jurafsky/slp3/](https://web.stanford.edu/~jurafsky/slp3/)
+- Python Unicode HOWTO: [https://docs.python.org/3/howto/unicode.html](https://docs.python.org/3/howto/unicode.html)
+- ftfy documentation: [https://ftfy.readthedocs.io/](https://ftfy.readthedocs.io/)
+- spaCy NER guide: [https://spacy.io/usage/linguistic-features#named-entities](https://spacy.io/usage/linguistic-features#named-entities)
+
